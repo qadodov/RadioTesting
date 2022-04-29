@@ -2,18 +2,14 @@ package ru.netology.SmartHouse;
 
 public class Radio {
 
-    public int currentStation;
-    public int volume;
+    private int currentStation;
+    private int currentVolume;
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public int getCurrentVolume() {
-        return volume;
-    }
-
-    public void setCurrentStation (int currentStation) {
+    public void setCurrentStation(int currentStation) {
         if (currentStation < 0) {
             return;
         }
@@ -23,54 +19,65 @@ public class Radio {
         this.currentStation = currentStation;
     }
 
-    public void nextStation(int currentStation) {
-        if (currentStation < 9 && currentStation >= 0) {
-            this.currentStation = currentStation + 1;
-        }
-        if (currentStation == 9) {
-            this.currentStation = 0;
-        }
-        return;
+    public int getCurrentVolume() {
+        return currentVolume;
     }
 
-    public void previousStation (int currentStation) {
-        if (currentStation > 0 && currentStation <= 9) {
-            this.currentStation = currentStation - 1;
-        }
-        if (currentStation == 0) {
-            this.currentStation = 9;
-        }
-        return;
-    }
-
-    public void setCurrentVolume(int volume) {
-        if (volume < 0) {
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume < 0) {
             return;
         }
-        if (volume > 10) {
+        if (currentVolume > 10) {
             return;
         }
-        this.volume = volume;
+        this.currentVolume = currentVolume;
+    }
+
+//    public void next() {
+//        int newCurrentStation = currentStation + 1;
+//        if (newCurrentStation == 1) {
+//            newCurrentStation = 0;
+//        }
+//        setCurrentStation(newCurrentStation);
+//        if (currentStation == 9) {
+//            currentStation = 0;
+//        }
+//    }
+//
+
+    public void increaseVolume() {
+        if (currentVolume < 10) {
+            currentVolume = currentVolume + 1;
+        }
+    }
+
+    public void decreaseVolume() {
+        if (currentVolume > 0) {
+            currentVolume = currentVolume - 1;
+        }
+    }
+
+    public void next() {
+        if (currentStation >= 0 && currentStation < 9) {
+            currentStation = currentStation + 1;
+        } else {currentStation = 0;}
 
     }
 
-    public void increaseVolume(int currentVolume) {
-        if (currentVolume >= 0 && currentVolume < 10) {
-            this.volume = currentVolume + 1;
-        }
-        if (currentVolume == 10) {
-            this.volume = currentVolume;
-        }
+    public void prev() {
+        if (currentStation <= 9 && currentStation > 0) {
+            currentStation = currentStation - 1;
+        } else {currentStation = 9;}
+
     }
-
-    public void decreaseVolume(int currentVolume) {
-        if (currentVolume > 0 && currentVolume <= 10) {
-            this.volume = currentVolume - 1;
-        }
-        if (currentVolume == 0) {
-            this.volume = currentVolume;
-        }
-    }
-
-
 }
+
+
+
+
+
+
+
+
+
+
