@@ -82,11 +82,25 @@ public class RadioTest {
     public void nextStation() {
         Radio service = new Radio();
 
-        service.setCurrentStation(15);
+        service.setCurrentStation(3);
 
         service.next();
 
-        int expected = 1;
+        int expected = 4;
+        int actual = service.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void changeStationFromMaxToMin() {
+        Radio service = new Radio();
+
+        service.setCurrentStation(9);
+
+        service.next();
+
+        int expected = 0;
         int actual = service.getCurrentStation();
 
         assertEquals(expected, actual);
@@ -107,14 +121,28 @@ public class RadioTest {
     }
 
     @Test
+    public void changeStationFromMinToMax() {
+        Radio service = new Radio();
+
+        service.setCurrentStation(0);
+
+        service.prev();
+
+        int expected = 9;
+        int actual = service.getCurrentStation();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void increaseVolume() {
         Radio service = new Radio();
 
-        service.setCurrentVolume(5);
+        service.setCurrentVolume(8);
 
         service.increaseVolume();
 
-        int expected = 6;
+        int expected = 9;
         int actual = service.getCurrentVolume();
 
         assertEquals(expected, actual);
@@ -129,6 +157,34 @@ public class RadioTest {
         service.decreaseVolume();
 
         int expected = 2;
+        int actual = service.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void increaseVolumeTopBorder() {
+        Radio service = new Radio();
+
+        service.setCurrentVolume(10);
+
+        service.increaseVolume();
+
+        int expected = 10;
+        int actual = service.getCurrentVolume();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void decreaseVolumeBottomBorder() {
+        Radio service = new Radio();
+
+        service.setCurrentVolume(0);
+
+        service.decreaseVolume();
+
+        int expected = 0;
         int actual = service.getCurrentVolume();
 
         assertEquals(expected, actual);
