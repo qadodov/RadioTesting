@@ -2,18 +2,38 @@ package ru.netology.SmartHouse;
 
 public class Radio {
 
+    // ПОЛЯ
+
     private int currentStation;
     private int currentVolume;
+    private int minStation = 0;
+    private int maxStation = 9;
+    private int minVolume = 0;
+    private int maxVolume = 100;
+    private int numberOfStations = 10;
+
+    // КОНСТРУКТОРЫ
+
+    public Radio(int numberOfStations) {
+        this.numberOfStations = numberOfStations;
+        this.maxStation = numberOfStations - 1;
+    }
+
+    public Radio() {
+        
+    }
+
+    // МЕТОДЫ
 
     public int getCurrentStation() {
         return currentStation;
     }
 
     public void setCurrentStation(int currentStation) {
-        if (currentStation < 0) {
+        if (currentStation < minStation) {
             return;
         }
-        if (currentStation > 9) {
+        if (currentStation > maxStation) {
             return;
         }
         this.currentStation = currentStation;
@@ -24,38 +44,38 @@ public class Radio {
     }
 
     public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0) {
+        if (currentVolume < minVolume) {
             return;
         }
-        if (currentVolume > 10) {
+        if (currentVolume > maxVolume) {
             return;
         }
         this.currentVolume = currentVolume;
     }
 
     public void increaseVolume() {
-        if (currentVolume < 10) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         }
     }
 
-    public void next() {
-        if (currentStation < 9) {
+    public void nextStation() {
+        if (currentStation < maxStation) {
             currentStation = currentStation + 1;
-        } else {currentStation = 0;}
+        } else {currentStation = minStation;}
 
     }
 
-    public void prev() {
-        if (currentStation > 0) {
+    public void prevStation() {
+        if (currentStation > minStation) {
             currentStation = currentStation - 1;
-        } else {currentStation = 9;}
+        } else {currentStation = maxStation;}
 
     }
 }
